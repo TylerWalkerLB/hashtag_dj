@@ -53,7 +53,7 @@
 
  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-var Botkit = require('/docroot/lib/node_modules/botkit/lib/Botkit.js');
+var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
 
 if (!process.env.token) {
