@@ -1,7 +1,7 @@
 /*
 *
 * To run:
-* token=xoxb-60037155413-jkYUgWT1Awv3kiPh9AAsJmjY node hashtagdj.js
+* token=THE_BOT_TOKEN node hashtagdj.js
 *
  */
 
