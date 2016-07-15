@@ -1,57 +1,9 @@
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- ______     ______     ______   __  __     __     ______
- /\  == \   /\  __ \   /\__  _\ /\ \/ /    /\ \   /\__  _\
- \ \  __<   \ \ \/\ \  \/_/\ \/ \ \  _"-.  \ \ \  \/_/\ \/
- \ \_____\  \ \_____\    \ \_\  \ \_\ \_\  \ \_\    \ \_\
- \/_____/   \/_____/     \/_/   \/_/\/_/   \/_/     \/_/
-
-
- This is a sample Slack bot built with Botkit.
-
- This bot demonstrates many of the core features of Botkit:
-
- * Connect to Slack using the real time API
- * Receive messages based on "spoken" patterns
- * Send a message with attachments
- * Send a message via direct message (instead of in a public channel)
-
- # RUN THE BOT:
-
- Get a Bot token from Slack:
-
- -> http://my.slack.com/services/new/bot
-
- Run your bot from the command line:
-
- token=<MY TOKEN> node demo_bot.js
-
- # USE THE BOT:
-
- Find your bot inside Slack to send it a direct message.
-
- Say: "Hello"
-
- The bot will reply "Hello!"
-
- Say: "Attach"
-
- The bot will send a message with a multi-field attachment.
-
- Send: "dm me"
-
- The bot will reply with a direct message.
-
- Make sure to invite your bot into other channels using /invite @<my bot>!
-
- # EXTEND THE BOT:
-
- Botkit has many features for building cool and useful bots!
-
- Read all about it here:
-
- -> http://howdy.ai/botkit
-
- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+/*
+*
+* To run:
+* token=xoxb-60037155413-jkYUgWT1Awv3kiPh9AAsJmjY node hashtagdj.js
+*
+ */
 
 var Botkit = require('./node_modules/botkit/lib/Botkit.js');
 
@@ -74,54 +26,41 @@ controller.spawn({
 });
 
 
-controller.hears(['hello','hi'],['direct_message','direct_mention','mention'],function(bot,message) {
-    bot.reply(message,"Hello.");
-});
+/* Listeners */
 
-controller.hears(['attach'],['direct_message','direct_mention'],function(bot,message) {
+controller.hears(['#dj'], ['mention', 'direct_message', 'direct_mention'], function(bot, message) {
+    var messageRecieved = message.text;
+    var messageFiltered = messageRecieved.replace('#dj ', '#dj');
+    messageFiltered = messageFiltered.replace('#dj', '');
 
-    var attachments = [];
-    var attachment = {
-        title: 'This is an attachment',
-        color: '#FFCC99',
-        fields: [],
-    };
+    var reply = "Sorry I didn't catch that. My hearing is pretty bad after so much music.\nSummon me with _#dj command_";
 
-    attachment.fields.push({
-        label: 'Field',
-        value: 'A longish value',
-        short: false,
-    });
+    switch (messageFiltered){
+        case ('help'):
+            reply = "What I know\n" +
+                "*help*\n" +
+                " - _List of everything I know_\n\n" +
+                "*skip*\n" +
+                " - _Don't like the song? Don't worry! I'll skip it!_\n\n" +
+                "*what is this song*\n" +
+                " - _I am the king of Name That Tune! I can tell you any song that is playing._";
+            break;
+        case ('skip'):
+            reply = "I would love to skip this song if I could";
+            break;
+        case ('what is this song'):
+            reply = "Let me hear a couple more notes...";
+            break;
+        default:
+            break;
+    }
 
-    attachment.fields.push({
-        label: 'Field',
-        value: 'Value',
-        short: true,
-    });
-
-    attachment.fields.push({
-        label: 'Field',
-        value: 'Value',
-        short: true,
-    });
-
-    attachments.push(attachment);
-
-    bot.reply(message,{
-        text: 'See below...',
-        attachments: attachments,
-    },function(err,resp) {
-        console.log(err,resp);
-    });
-});
-
-controller.hears(['dm me'],['direct_message','direct_mention'],function(bot,message) {
-    bot.startConversation(message,function(err,convo) {
-        convo.say('Heard ya');
-    });
-
-    bot.startPrivateConversation(message,function(err,dm) {
-        dm.say('Private reply!');
-    });
+    bot.reply(
+        message,
+        {
+            'text'   : reply,
+            'mrkdwn' : true
+        }
+    );
 
 });
