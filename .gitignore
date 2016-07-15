@@ -28,6 +28,7 @@
 ## File-based project format:
 *.iws
 *.sample
+/docroot/lib/node_modules/
 ## Plugin-specific files:
 
 # IntelliJ

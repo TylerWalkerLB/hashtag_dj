@@ -1,0 +1,15 @@
+{
+  "name": "hashtagdj",
+  "version": "1.0.0",
+  "description": "Hashtag DJ: A Slack bot that can help a team control their tunes.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "TylerWalkerLB",
+  "license": "MIT Open Source",
+  "dependencies": {
+    "botkit": "^0.2.2"
+  }
+}
