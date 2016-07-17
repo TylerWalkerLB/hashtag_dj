@@ -29,6 +29,7 @@
 *.iws
 *.sample
 /lib/node_modules/
+
 ## Plugin-specific files:
 
 # IntelliJ

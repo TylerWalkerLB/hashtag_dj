@@ -10,6 +10,7 @@
   "author": "TylerWalkerLB",
   "license": "MIT Open Source",
   "dependencies": {
+    "applescript": "^1.0.0",
     "botkit": "^0.2.2"
   }
 }
